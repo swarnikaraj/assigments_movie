@@ -110,13 +110,12 @@ async function getmovie(){
 
     
 
-    let res= await fetch('https://www.omdbapi.com/?i=tt3896198&apikey=f3e8b344')
+    let res= await fetch(`http://www.omdbapi.com/?t=${input_movie}&apikey=f3e8b344`)
 
     let data = await res.json()
    
    
     showmovie(data)
-
 
 }
 
@@ -129,7 +128,7 @@ function showmovie(movie){
   div=document.createElement("div")
   
  img=document.createElement("img")
- img.src="https://upload.wikimedia.org/wikipedia/en/3/33/Guardians_of_the_Galaxy_%28film%29_poster.jpg"
+ img.src=movie.Poster
  
   
  

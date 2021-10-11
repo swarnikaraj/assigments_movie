@@ -11,6 +11,8 @@
     
     <style>
 
+
+      div{border:2px solid red}
        
      body{background-color: black;}
 
@@ -48,7 +50,8 @@
 
   #nav-center-item>input{width:350px; padding:10px}
 
-  .box{width:300px; width:300px; height:500px; margin:auto;margin-top: 100px; color: white; padding:20px}
+  .box{width:300px; width:300px; height:400px; margin:auto;margin-top: 100px; color: white; padding:20px}
+  #data >img{height:250px; width:280px}
   
     </style>
 </head>
@@ -99,25 +102,55 @@
 
 
 
-
-
 <script>
 
-async function getmovie(){
+function getmovie(){   
+
+let input_movie=document.getElementById("input-movie").value;
+
+fetch(`https://www.omdbapi.com/?t=${input_movie}&apikey=f3e8b344`)
+ .then(function (res) {
+
+    return res.json();
+     
+ })
 
 
-    let input_movie=document.getElementById("input-movie").value;
+
+ .then(function (res) {
+
+    showmovie(res)
+        
+   
+
+    });
+
+ 
+
+
+}
+
+
+
+
+
+
+// async function getmovie(){
+
+
+//     let input_movie=document.getElementById("input-movie").value;
 
     
 
-    let res= await fetch(`https://www.omdbapi.com/?t=${input_movie}&apikey=f3e8b344`)
+//     let res= await fetch(`https://www.omdbapi.com/?t=${input_movie}&apikey=f3e8b344`)
+    
 
-    let data = await res.json()
+//     let data = await res.json()
    
    
-    showmovie(data)
+//     showmovie(data)
 
-}
+// }
 
 
 container=document.getElementById("data")
@@ -125,7 +158,7 @@ container=document.getElementById("data")
 function showmovie(movie){
     container.innerHTML=null
 
-  div=document.createElement("div")
+  
   
  img=document.createElement("img")
  img.src=movie.Poster

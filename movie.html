@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movies</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
+
+    
+    <style>
+
+       
+     body{background-color: black;}
+
+     
+
+       #nav-div{
+           display:flex;
+           background-color: rgb(68, 68, 68);
+           width:100%;
+           height: 100px;
+           position: fixed;
+           top:0;
+           left:0;
+           right:0;
+       }
+
+  #nav-left-item{
+      color: blanchedalmond;
+      font-size: 32px;
+      font-style: italic;
+
+      position: absolute;
+      left:30px;
+      top:10px
+  }
+
+ #search-icon{margin: -25px;}
+  #nav-center-item{
+      
+
+      margin:auto;
+       text-align: center;
+
+  }
+
+  #nav-center-item>input{width:350px; padding:10px}
+
+  .box{width:300px; width:300px; height:500px; margin:auto;margin-top: 100px; color: white; padding:20px}
+  
+    </style>
+</head>
+<body>
+  
+ <div>  
+
+<div id="nav-div">
+
+<span id="nav-left-item">Your Movies.Com</span>
+
+ <div id="nav-center-item">
+<input type="text" placeholder="Search your favourite movies" id="input-movie">
+<i class="fas fa-search" id="search-icon" onclick="getmovie()"></i>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div id="data" class="box">
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div> 
+
+
+
+<!-- This API has single movie  information -->
+
+
+
+<script>
+
+async function getmovie(){
+
+
+    let input_movie=document.getElementById("input-movie").value;
+
+    
+
+    let res= await fetch('http://www.omdbapi.com/?i=tt3896198&apikey=f3e8b344')
+
+    let data = await res.json()
+   
+   
+    showmovie(data)
+
+
+}
+
+
+container=document.getElementById("data")
+
+function showmovie(movie){
+    container.innerHTML=null
+
+  div=document.createElement("div")
+  
+ img=document.createElement("img")
+ img.src="https://upload.wikimedia.org/wikipedia/en/3/33/Guardians_of_the_Galaxy_%28film%29_poster.jpg"
+ 
+  
+ 
+  
+ namemovie=document.createElement('p')
+ namemovie.innerHTML=movie.Title
+
+ released=document.createElement('p')
+ released.innerText= "Released:" + " " +movie.Released
+
+ imdb=document.createElement('p')
+ imdb.innerText= "Imdb Ratings:" + " " +movie.imdbRating
+
+ actors=document.createElement('p')
+ actors.innerText= "Actors:" + " " +movie.Actors
+
+
+ container.append(img,namemovie,released,imdb,actors)
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+    
+</body>
+</html>

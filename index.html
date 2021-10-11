@@ -107,29 +107,70 @@ function getmovie(){
 let input_movie=document.getElementById("input-movie").value;
 
 fetch(`https://www.omdbapi.com/?t=${input_movie}&apikey=f3e8b344`)
+
  .then(function (res) {
 
-    return res.json();
+   return res.json();
      
  })
 
-
+ 
 
  .then(function (res) {
     
+    
+     
+    if(res.Title==undefined){console.log("Its undefined") ; errorhandler()}
+
+
+
+     else{
+
+
     if(Number(res.imdbRating)>=8.5){showtag(); console.log(Number(res.imdbRating))}
-
-    console.log(Number(res.imdbRating))
     showmovie(res)
-        
+
+
+
+
+      }
    
+    })
 
-    });
+.catch(console.log);
+  
 
- 
+
+
 
 
 }
+
+
+
+  
+
+
+container=document.getElementById("data")
+
+function errorhandler(){
+  
+
+    
+
+    img=document.createElement("img")
+    img.src="https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"
+
+
+
+      container.append(img)
+}
+
+
+
+
+
+
 
 
 

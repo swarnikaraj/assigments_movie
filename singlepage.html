@@ -7,25 +7,72 @@
     <title>Document</title>
 
     <style>
-    div{border:2px solid red}
+    div{border:1px solid black}
 
     
+  #details{display: flex;}
+
+  #details>div:nth-child(1){margin:20px}
+
+  #details>div:nth-child(2){height:200px;width: 200px; text-align: center; margin-top: 100px;margin-left: 100px; font-size: 34px; padding-top: 99px;}
+
+  #details>div:nth-child(3){height:200px;width: 200px; text-align: center; margin-top: 100px; font-size: 24px; padding-top: 99px;}
+
+  #details>div:nth-child(4){height:200px;width: 200px; text-align: center; margin-top: 100px; font-size: 24px; padding-top: 99px;}
+
+  #details>div:nth-child(5){height:200px;width: 200px; text-align: center; margin-top: 100px; font-size: 24px; padding-top: 99px;}
+
+
+
+
+
+
 
 
     </style>
 </head>
 
 <body>
-<div id="slider">
 
-
-
-
-
-</div>
 
 
 <div id="details"> 
+
+
+    <div id="slider">
+
+
+
+
+
+    </div>
+
+   <div id="title">
+
+  
+
+  </div>
+
+  <div id="type">
+
+  
+
+  </div>
+
+  <div id="year">
+
+  
+
+  </div>
+
+
+  <div id="imdb">
+
+  
+
+  </div>
+
+
 
 
 
@@ -44,8 +91,33 @@
  smovie=JSON.parse(localStorage.getItem('s_p'))
 
   console.log(smovie)
- 
+ function showitem(){
+  moviePoster=document.getElementById("slider")
+  
+  moviePoster.innerHTML=null
 
+  img=document.createElement('img')
+  img.src=smovie.Poster
+
+  moviePoster.append(img)
+
+  title=document.getElementById("title")
+  title.innerHTML=smovie.Title
+  
+
+  type=document.getElementById("type")
+  type.innerHTML= "Type:"+smovie.Type
+
+  year=document.getElementById("year")
+  year.innerHTML="Year:"+smovie.Year
+
+  imdb=document.getElementById("imdb")
+  imdb.innerHTML="IMDB:"+smovie.imdbID
+
+
+ }
+
+ showitem()
 
 
 

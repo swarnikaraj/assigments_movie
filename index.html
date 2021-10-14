@@ -13,7 +13,7 @@
 
       
        
-     body{background-color: #0C111B;}
+     body{background-color: #0C111B; color: white;}
 
      
        #nav-div{
@@ -71,6 +71,13 @@
       }
 
       .slides >img{ height:400px;  width:1500px; border-radius: 20px;  }
+
+      #popular-div{display:grid; grid-template-columns: 11% 11% 11% 11% 11% 11% 11%  11%;grid-gap:20px;
+        
+         width:1500px; margin-top: 25px;}
+        #popular-div>div{cursor: pointer;}
+
+        #popular-div>div >img{width:150px; height: 240px; border-radius: 5px;}
   
     </style>
 </head>
@@ -133,7 +140,15 @@
 </div>
 
 
+<h2 id="popular-heading"> Popular Movies</h2>
 
+<div id="popular-div">
+
+
+
+
+
+</div>
 
 
 
@@ -297,6 +312,7 @@ function single_movie(movie){
 
 
 
+  
 
 
 
@@ -304,22 +320,79 @@ function single_movie(movie){
 
 
 
-async function getdat(){
 
 
-let res = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=9a055944eb8a1a3593dbe2e7bc6102fb&language=en-US&page=1')
 
 
-let data = await res.json()
 
 
-console.log(data)
+
+
+async function getpopular(){
+
+  
+  try{
+        let res=await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=7d7a9a6c33a69866ca2616dbfe472ef9`)
+        let data = await res.json();
+       console.log(data)
+       appendpopular(data.results)
+
+
+    }
+    catch(e){
+        console.log(`Error:${e}`)
+    }
+
+
+}
+
+getpopular()
+
+
+pupular_div=document.getElementById("popular-div")
+
+
+function appendpopular(items){
+
+
+items.forEach(item=>{
+
+  div=document.createElement('div')
+
+
+img=document.createElement('img')
+img.src=`https://image.tmdb.org/t/p/w500/${item.poster_path}`
+
+p=document.createElement('p')
+p.innerHTML=item.title
+
+div.append(img,p)
+
+
+div.onclick=function (){
+  show_single_popular(item)
+}
+
+pupular_div.append(div)
+
+
+
+})
+  
 
 
 
 }
 
-getdat()
+function show_single_popular(item){
+  window.location.href="single.html"
+
+
+ localStorage.setItem('s_p',JSON.stringify(item))
+
+
+  console.log(item)
+}
 
 
 

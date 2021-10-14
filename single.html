@@ -4,138 +4,204 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>movies</title>
+    <title>Document</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
-
-    
     <style>
-       
-       .row{color: white;}
 
 
-     body{background-color: rgb(20, 20, 20);}
+body{background-color: #0C111B; color: white;}
 
      
-       #nav-div{
-           display:flex;
-           background-color: rgb(68, 68, 68);
-           width:100%;
-           height: 100px;
-           position: fixed;
-           top:0;
-           left:0;
-           right:0;
-       }
+#nav-div{
+    display:flex;
+    background-color: #131A27;
+    width:100%;
+   height: 80px;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+}
 
-  #nav-left-item{
-      color: blanchedalmond;
-      font-size: 32px;
-      font-style: italic;
-      
-      position: absolute;
-      left:30px;
-      top:10px
-  }
+    
+  #details{display: flex; position: fixed; top:105px; border:1px solid white}
 
- #search-icon{margin: -25px;}
-  #nav-center-item{
-      
+  #details>div:nth-child(1){margin:20px}
+  #details>div:nth-child(1)>img{width:300px}
 
-      position: fixed;
-      top:20px ;
-      right:50px;
-       text-align: center;
+  #details>div:nth-child(2){height:200px;width: 200px; text-align: center; margin-top: 100px;margin-left: 50px; font-size: 34px; padding-top: 99px; border:1px solid white}
 
-  }
+  #details>div:nth-child(3){height:200px;width: 200px; text-align: center; margin-top: 100px; font-size: 24px; padding-top: 99px; border:1px solid white; overflow-y: scroll;}
+
+  #details>div:nth-child(4){height:200px;width: 200px; text-align: center; margin-top: 100px; font-size: 24px; padding-top: 99px; border:1px solid white}
+
+  #details>div:nth-child(5){height:200px;width: 200px; text-align: center; margin-top: 100px; margin-right: 50px;font-size: 24px; padding-top: 99px; border:1px solid white}
 
 
-  
+#nav-left-item{
+color: blanchedalmond;
+font-size: 32px;
+font-style: italic;
 
-  #nav-center-item>input{width:350px; padding:10px}
+position: absolute;
+left:30px;
+top:10px
+}
 
-  .box{width:300px; width:300px; height:300px;  color: white; padding:20px; background-color: rgb(14, 13, 13); overflow-y: scroll;
-     position: fixed;
-     top:100px;
-      right:50px;
-  
-  }
-  #movies >div{display: flex; background-color: rgb(77, 75, 75); margin:10px; border-radius: 5px ;}
+#search-icon{margin: -25px;}
+#nav-center-item{
 
-  #movies >div>div{margin:5px}
-  #movies >div >div >img{width:150px; height:80px}
-  #tag{text-align: center;}
 
-  div{border:2px solid red}
+position: fixed;
+top:20px ;
+right:100px;
+text-align: center;
+
+}
+
+#nav-center-item>input{width:350px; padding:10px}
+
+.box{width:300px; width:300px; height:300px;  color: white; padding:20px; background-color: rgb(14, 13, 13); overflow-y: scroll;
+position: fixed;
+top:100px;
+right:50px;
+
+}
+#movies >div{display: flex; background-color: rgb(77, 75, 75); margin:10px; border-radius: 5px ;}
+
+#movies >div>div{margin:5px}
+#movies >div >div >img{width:150px; height:80px}
+#tag{text-align: center;}
+
+
+.main{margin-left:150px}
+
+
+
     </style>
 </head>
+
 <body>
-  
- 
 
-<div id="nav-div">
+    <div class="main">
+    
+ <div id="nav-div">
 
-<span id="nav-left-item">Movies.Search </span>
-
- <div id="nav-center-item">
-<input type="text" placeholder="Search" id="movie"  oninput="main()" onclick="appeardiv()">
-<i class="fas fa-search" id="search-icon" ></i>
-</div>
-
-
-</div>
-
+    <span id="nav-left-item">Movies.Search </span>
+    
+     <div id="nav-center-item">
+    <input type="text" placeholder="Search" id="movie"  oninput="main()" onclick="appeardiv()">
+    <i class="fas fa-search" id="search-icon" ></i>
+    </div>
+    
+    
 
 
 
 
 
+    </div>
 
-
-<div id="movies" class="box">
-
-
-
-
-</div>
+    <div id="movies" class="box">
 
 
 
 
+     </div>
+    
 
-<div id="slider">
-
-
-
-
-
-</div>
 
 
 <div id="details"> 
 
 
+    <div id="slider">
+
+
+
+
+
+    </div>
+
+   <div id="title">
+
+  
+
+  </div>
+
+  <div id="type">
+
+  
+
+  </div>
+
+  <div id="year">
+
+  
+
+  </div>
+
+
+  <div id="imdb">
+
+  
+
+  </div>
+
+
+
+
 
 </div>
 
 
 
 
-
-
-
-
-
-
-
 </div>
-
 
 
 
 <script>
 
-let movies_div=document.getElementById("movies");
+
+ smovie=JSON.parse(localStorage.getItem('s_p'))
+
+  console.log(smovie)
+ function showitem(){
+  moviePoster=document.getElementById("slider")
+  
+  moviePoster.innerHTML=null
+
+  img=document.createElement('img')
+  img.src=`https://image.tmdb.org/t/p/w500/${smovie.poster_path}`
+
+
+  moviePoster.append(img)
+
+  title=document.getElementById("title")
+  title.innerHTML=smovie.original_title
+  
+
+  type=document.getElementById("type")
+  type.innerHTML= "Type:"+smovie.overview
+
+  year=document.getElementById("year")
+  year.innerHTML="Year:"+smovie.release_date
+
+  imdb=document.getElementById("imdb")
+  imdb.innerHTML="IMDB:"+smovie.vot_average
+
+
+ }
+
+ showitem()
+
+
+
+
+
+
+ let movies_div=document.getElementById("movies");
 
 
 async function searchMovies(movie_name){  
@@ -147,6 +213,8 @@ async function searchMovies(movie_name){
    let data = await res.json()
 
    return data
+
+   console.log(type(data))
  
     
   } catch (e) {
@@ -223,11 +291,14 @@ function appeardiv(){
 
 function single_movie(movie){
 
- window.location.href="single.html"
+ window.location.href="singlepage.html"
+ 
 
-console.log(movie)
+ localStorage.setItem('s_p',JSON.stringify(movie))
 
+   console.log(movie)
 
+  
 
 }
 
@@ -250,7 +321,26 @@ console.log(movie)
 
 
 
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -101,7 +101,7 @@
    </div>
 
  <div id="nav-right-item">
-<input type="text" placeholder="Search" id="movie"  oninput="main()" onclick="appeardiv()">
+<input type="text" placeholder="Search" id="movie"  oninput="debounce(main,1000)" onclick="appeardiv()">
 <i class="fas fa-search" id="search-icon" style="color: white;" ></i>
  
 <button>Subscribe</button>
@@ -229,6 +229,8 @@ async function searchMovies(movie_name){
 
 }
 
+var timerId;
+
 function appendMovies(movies){
 
 if(movies==undefined){return false}
@@ -269,6 +271,7 @@ async function main(){
 
   let name=document.getElementById("movie").value
 
+  if(name.length<3){return false;}
   
 
  let res = await searchMovies(name)
@@ -277,6 +280,36 @@ async function main(){
 
 
 }
+
+function debounce(func,delay){
+if(timerId){
+  clearTimeout(timerId);
+}
+
+timerId=setTimeout(() => {
+
+  func();
+
+  
+}, delay);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

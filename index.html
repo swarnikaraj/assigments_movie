@@ -232,12 +232,17 @@ async function searchMovies(movie_name){
 var timerId;
 
 function appendMovies(movies){
+    
 
 if(movies==undefined){return false}
+    
+    
 
 movies_div.innerHTML=null
 
 movies.forEach(movie => {
+    
+    if(movie.Title==undefined){return false}
 
   let div=document.createElement('div')
 

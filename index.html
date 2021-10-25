@@ -14,7 +14,7 @@
       #login_div{
         background-color:#131A27 ;
          width:450px;
-         height: 400px;
+         height: 500px;
          position: fixed;
          top:150px;
          left:600px;
@@ -44,6 +44,18 @@
         border: 1px solid rgb(31,128,224);
         padding:10px 50px;
         border-radius: 5px;
+      }
+
+      #loginbtn{
+
+        margin-left: 50px;
+        margin-top: 10px;
+        background-color:rgb(22,39,63) ;
+        border: 1px solid rgb(31,128,224);
+        padding:10px 50px;
+        border-radius: 5px;
+
+
       }
 
       #login_div>div{
@@ -166,7 +178,8 @@
  
 <button>Subscribe</button>
 
-<span onclick="appearbox()" >LOGIN</span>
+<span onclick="appearbox()"  id='profbtn'>LOGIN</span>
+<span id='userprofile'></span>
  
 </div>
 
@@ -213,22 +226,26 @@
 </div> 
 
 
- <div id="login_div">
+   <div id="login_div">
 
    
     <button type="button" id="cl_btn" class="btn-close btn-close-white" aria-label="Close" style="margin-right: 20px;" onclick="closebox()"></button>
    
 
 
-     <p>Login continue</p>
+     <p>Are your a New User</p>
   
 
-     <button id="fbem">Have a Facebook/Email account?</button>
-              <p id="or">or</p>
+     <a href='register.html'><button id="fbem"> Get Register</button></a>
+              <p id="or">Already Registered?</p>
 
       <div>
 
-      <span>+91</span><input type="text" placeholder="Enter your mobile number" onclick="appearbutton()"> 
+      <input type="text" placeholder="Username"  id='username'> <br><br>
+      <input type="text" placeholder="Password"  id='password'> 
+
+
+      <button id='loginbtn' onclick="login()">Login</button>
 
      </div>
 
@@ -243,6 +260,87 @@
 
 
 <script>
+
+ 
+async function login(){
+  username=document.getElementById('username').value
+
+  // document.getElementById('userprofile').textContent=username
+
+ 
+
+user={
+  username:document.getElementById('username').value,
+password:document.getElementById('password').value
+
+}
+
+
+
+data_to_send=JSON.stringify(user)
+
+    
+try{
+response=await fetch('https://masai-api-mocker.herokuapp.com/auth/login',{
+
+ method:"POST",
+ body:data_to_send,
+ headers:{
+     'Content-Type':'application/json'
+ }
+  
+
+
+ })
+
+ data=await response.json()
+
+ fetchprofile(username,data.token)
+ console.log(username,data.token)
+ document.getElementById('profbtn').innerText='LogedIn' + " " +username
+
+}
+
+catch(e){
+
+ console.log(e)
+
+}
+
+
+
+
+}
+
+
+
+async function fetchprofile(username,token){
+
+try{
+
+ response=await  fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+    headers:{
+
+        "Content-Type":"application/json",
+        'Authorization': `Bearer ${token}`,
+    },
+
+   })
+
+prof=await response.json()
+
+
+  console.log(prof)
+
+  }
+
+  catch(e){console.log(e)}
+
+}
+
+
+
+
 
 
 slideimage=[
